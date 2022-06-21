@@ -20,7 +20,11 @@ namespace Evaluacion2_Francisco_Berwart {
 
 
             // 2. 
+            // listadoRealPersonas =  leer csv;
+            // listadoRealArticulos =  leer csv;
 
+            // 3.
+            // Consultas.
 
 
 
@@ -42,10 +46,35 @@ namespace Evaluacion2_Francisco_Berwart {
             articulos.Add(new Articulo(3, "SSH SD", "PackardBll", 20000, 1, true, "18-06-2022"));
             articulos.Add(new Articulo(4, "Suzuki", "Moto RB", 20000, 2, false, "15-06-2022"));
 
+            string line = "";
+
+            string[] args;
+
+            /**
+            if () {
+                string Header = "fecha,Rut, Nombre, Apellido, Ciudad, Comuna, Telefono, Preferencias1, Preferencias2, Preferencias3, valor, Descripcion, ObjetoIntercambio";
+                File.WriteAllText(args[0], Header);
+            }
+            **/
+
+            int i = 0;
             foreach (Articulo art in articulos) {
+                if (i == 0) {
+                    line = "ID,Nombre,ValorAproximado,PersonaId,Descripcion,FechaIngreso,ESTADO";
+                    exit.AppendLine(string.Join(separator, line));
+
+                }
+
                 // escribir una linea por cada art
                 // OJO CON EL ORDEN DE LAS PROPIEDADES.
-                string line = art.Id + ","
+                string disponiBleString = "";
+                if(art.Disponible == true) {
+                    disponiBleString = "DISPONIBLE";
+                } else {
+                    disponiBleString = "NO DISPONIBLE";
+                }
+               
+                line = art.Id + ","
                     + art.Nombre
                     + ","
                     + art.ValorAproximado
@@ -54,8 +83,13 @@ namespace Evaluacion2_Francisco_Berwart {
                     + ","
                     + art.Descripcion
                     + ","
-                    + art.FechaIngreso;
-                exit.AppendLine(string.Join(separator, line));
+                    + art.FechaIngreso
+                    + ","
+                    + disponiBleString;
+                    ;
+                    exit.AppendLine(string.Join(separator, line));
+                
+                    i++;
             }
 
             // escribir el archivo.
@@ -86,6 +120,10 @@ namespace Evaluacion2_Francisco_Berwart {
             File.WriteAllText(path, exit.ToString());
         }
 
+
+        static void writeHistory() {
+
+        }
 
 
 
