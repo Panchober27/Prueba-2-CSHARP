@@ -1,5 +1,4 @@
-ID,Nombre,ValorAproximado,PersonaId,Descripcion,FechaIngreso,ESTADO 
-
+ID,Nombre,ValorAproximado,PersonaId,Descripcion,FechaIngreso,ESTADO
 1,Dell,12500,1,Laptop,20-06-2022,DISPONIBLE
 2,Toyota,58000,1,PC SD,20-06-2022,DISPONIBLE
 3,PackardBll,20000,1,SSH SD,18-06-2022,DISPONIBLE

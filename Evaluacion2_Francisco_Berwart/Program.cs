@@ -68,12 +68,12 @@ namespace Evaluacion2_Francisco_Berwart {
                 // escribir una linea por cada art
                 // OJO CON EL ORDEN DE LAS PROPIEDADES.
                 string disponiBleString = "";
-                if(art.Disponible == true) {
+                if (art.Disponible == true) {
                     disponiBleString = "DISPONIBLE";
                 } else {
                     disponiBleString = "NO DISPONIBLE";
                 }
-               
+
                 line = art.Id + ","
                     + art.Nombre
                     + ","
@@ -86,16 +86,14 @@ namespace Evaluacion2_Francisco_Berwart {
                     + art.FechaIngreso
                     + ","
                     + disponiBleString;
-                    ;
-                    exit.AppendLine(string.Join(separator, line));
-                
-                    i++;
-            }
+                ;
+                exit.AppendLine(string.Join(separator, line));
 
+                i++;
+            }
             // escribir el archivo.
             File.WriteAllText(path, exit.ToString());
         }
-
 
 
         // Funcion para crear listado de personas, por defecto.        
@@ -119,13 +117,6 @@ namespace Evaluacion2_Francisco_Berwart {
             // escribir el archivo.
             File.WriteAllText(path, exit.ToString());
         }
-
-
-        static void writeHistory() {
-
-        }
-
-
 
     }
 }
