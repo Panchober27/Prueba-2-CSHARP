@@ -19,6 +19,11 @@ namespace Evaluacion2_Francisco_Berwart {
             writeCSVArticulos();
 
 
+            // Menu principal.
+            renderMenu();
+
+
+
             // 2. 
             // listadoRealPersonas =  leer csv;
             // listadoRealArticulos =  leer csv;
@@ -117,6 +122,147 @@ namespace Evaluacion2_Francisco_Berwart {
             // escribir el archivo.
             File.WriteAllText(path, exit.ToString());
         }
+
+
+
+        static void renderMenu() {
+            Console.Clear();
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Opciones:");
+            Console.WriteLine("1. Ver Opciones Articulos.");
+            Console.WriteLine("2. Ver Opciones Personas.");
+            Console.WriteLine("3. Ver Realiza Trueque.");
+            Console.WriteLine("4. Salir.");
+            
+            string input = Console.ReadLine();
+            switch (input) {
+                case "1":
+                    renderArticulos();
+                    break;
+                case "2":
+                    renderPersonas();
+                    break;
+                case "3":
+                    renderTrueque();
+                    break;
+                case "4":
+                    Console.WriteLine("Saliendo del Sistema.");
+                    break;
+                default:
+                    Console.WriteLine("Opcion no valida.");
+                    break;
+            }
+        }
+
+
+
+
+        static void renderArticulos(){
+            Console.Clear();
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Opciones Articulos:");
+            Console.WriteLine("");
+            Console.WriteLine("1. Ver Articulos disponibles.");
+            Console.WriteLine("2. Agregar Articulo.");
+            Console.WriteLine("3. Editar Articulo.");
+            Console.WriteLine("4. Eliminar Articulo.");
+            Console.WriteLine("5. Volver.");
+            string input = Console.ReadLine();
+            switch (input) {
+                case "1":
+                    Console.WriteLine("Opcion no lista.");
+                    break;
+                case "2":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "3":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "4":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "5": 
+                    renderMenu();
+                    break;
+                default:
+                    Console.WriteLine("Opcion no valida.");
+                    break;
+            }
+        }
+        
+        static void renderPersonas(){
+            Console.Clear();
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Opciones Personas:");
+            Console.WriteLine("");
+            Console.WriteLine("1. Ver Personas.");
+            Console.WriteLine("2. Agregar Persona.");
+            Console.WriteLine("3. Editar Persona.");
+            Console.WriteLine("4. Eliminar Persona.");
+            Console.WriteLine("5. Volver.");
+            string input = Console.ReadLine();
+            switch (input) {
+                case "1":
+                    Console.WriteLine("Opcion no lista.");
+                    break;
+                case "2":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "3":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "4":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "5":
+                    renderMenu();
+                    break;
+                default:
+                    Console.WriteLine("Opcion no valida.");
+                    break;
+            }
+        }
+
+        static void renderTrueque(){
+            Console.Clear();
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Opciones Trueque:");
+            Console.WriteLine("");
+            Console.WriteLine("1. Ver Trueque.");
+            Console.WriteLine("2. Agregar Trueque.");
+            Console.WriteLine("3. Editar Trueque.");
+            Console.WriteLine("4. Eliminar Trueque.");
+            Console.WriteLine("5. Volver.");
+            string input = Console.ReadLine();
+            switch (input) {
+                case "1":
+                    Console.WriteLine("Opcion no lista.");
+                    break;
+                case "2":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "3":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "4":
+                    Console.WriteLine("Opcion no lista");
+                    break;
+                case "5":
+                    renderMenu();
+                    break;
+                default:
+                    Console.WriteLine("Opcion no valida.");
+                    break;
+            }
+        }
+
+
+
+
 
     }
 }
