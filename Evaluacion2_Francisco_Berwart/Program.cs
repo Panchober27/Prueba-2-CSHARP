@@ -19,8 +19,50 @@ namespace Evaluacion2_Francisco_Berwart {
             writeCSVArticulos();
 
 
+            // Cargar datos en memoria, esto lo hare leyendo los valores en los .csv para cargarlos a listas de objetos.
+            List<Persona> personas = new List<Persona>();
+            List<Articulo> articulos = new List<Articulo>();
+            string personasPath = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\listaPersonas.csv";
+            
+            // crear listado de personas en base al archivo.
+            StreamReader personasFile = new StreamReader(personasPath);
+            string linea;
+            try
+            { 
+                int i= 0;
+                while ((linea = personasFile.ReadLine()) != null)
+                {
+
+                    string[] split = linea.Split(',');
+                    if (i != 0)
+                    {
+                        personas.Add(new Persona(Int16.Parse(split[0]), split[1], split[2], split[3], split[3]));
+                    }
+                    System.Console.WriteLine(linea);
+
+                    i++;
+                }
+                personasFile.Close();
+                Console.WriteLine(linea);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
+
+            // Revisar Valores de Lista Persona.
+            try {
+                var x = personas[0];
+                Console.WriteLine(x);
+
+            } catch (Exception e) {
+                Console.WriteLine("Error 2: " + e.Message);
+            }
+
+            
             // Menu principal.
-            renderMenu();
+            // renderMenu(personas, articulos);
+            writeHistory();
 
 
 
@@ -36,6 +78,16 @@ namespace Evaluacion2_Francisco_Berwart {
 
             Console.ReadLine();
         }
+
+
+
+
+
+
+
+
+
+
 
         // funcion para ....
         // static void writeCSVArticulos(int id, string descripcion, string nombre, double valorAproximado, List<Articulo> preferencias) {
@@ -125,7 +177,29 @@ namespace Evaluacion2_Francisco_Berwart {
 
 
 
-        static void renderMenu() {
+        // Funcion para escribir el archivo de historial.
+        static void writeHistory() {
+            String path = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\historial.txt";
+            String separator = ",";
+            StringBuilder exit = new StringBuilder();
+            // Revisar que datos y de que forma se guardara el historial.
+            //String line = id + "," + descripcion + "," + nombre + "," + valorAproximado;
+            // crear lista con los articulos creados.
+            // escrbir una linea
+
+            // Crear nueva fecha
+            DateTime fecha = DateTime.Now;
+            string line = "Esta es una linea de prueba en el archivo historial" + "," + fecha;
+            exit.AppendLine(string.Join(separator, line));
+            File.WriteAllText(path, exit.ToString());
+        }
+
+
+
+
+
+
+        static void renderMenu(List<Persona> personas, List<Articulo> articulos) {
             Console.Clear();
             Console.WriteLine("---------------------------------------");
             Console.WriteLine("---------------------------------------");
@@ -138,13 +212,13 @@ namespace Evaluacion2_Francisco_Berwart {
             string input = Console.ReadLine();
             switch (input) {
                 case "1":
-                    renderArticulos();
+                    //renderArticulos();
                     break;
                 case "2":
-                    renderPersonas();
+                    renderPersonas(personas ,articulos);
                     break;
                 case "3":
-                    renderTrueque();
+                    //renderTrueque();
                     break;
                 case "4":
                     Console.WriteLine("Saliendo del Sistema.");
@@ -158,7 +232,7 @@ namespace Evaluacion2_Francisco_Berwart {
 
 
 
-        static void renderArticulos(){
+        static void renderArticulos(List<Persona> personas, List<Articulo> articulos){
             Console.Clear();
             Console.WriteLine("---------------------------------------");
             Console.WriteLine("---------------------------------------");
@@ -184,7 +258,7 @@ namespace Evaluacion2_Francisco_Berwart {
                     Console.WriteLine("Opcion no lista");
                     break;
                 case "5": 
-                    renderMenu();
+                    //renderMenu();
                     break;
                 default:
                     Console.WriteLine("Opcion no valida.");
@@ -192,7 +266,8 @@ namespace Evaluacion2_Francisco_Berwart {
             }
         }
         
-        static void renderPersonas(){
+        // Esta funcion recibe la lista de personas y articulos.
+        static void renderPersonas(List<Persona> personas, List<Articulo> articulos) {
             Console.Clear();
             Console.WriteLine("---------------------------------------");
             Console.WriteLine("---------------------------------------");
@@ -218,7 +293,7 @@ namespace Evaluacion2_Francisco_Berwart {
                     Console.WriteLine("Opcion no lista");
                     break;
                 case "5":
-                    renderMenu();
+                    renderMenu(personas, articulos);
                     break;
                 default:
                     Console.WriteLine("Opcion no valida.");
@@ -226,7 +301,7 @@ namespace Evaluacion2_Francisco_Berwart {
             }
         }
 
-        static void renderTrueque(){
+        static void renderTrueque(List<Persona> personas, List<Articulo> articulos){
             Console.Clear();
             Console.WriteLine("---------------------------------------");
             Console.WriteLine("---------------------------------------");
@@ -252,7 +327,7 @@ namespace Evaluacion2_Francisco_Berwart {
                     Console.WriteLine("Opcion no lista");
                     break;
                 case "5":
-                    renderMenu();
+                    renderMenu(personas, articulos);
                     break;
                 default:
                     Console.WriteLine("Opcion no valida.");

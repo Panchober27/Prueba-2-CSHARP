@@ -16,6 +16,9 @@ namespace Evaluacion2_Francisco_Berwart {
         public string Apellidos { get; set; }
         public string Telefono { get; set; }
 
+        // lista de articulos asociados al vnededor.
+        private List<Articulo> listadoArticulos;
+
 
         // constructor.
         public Persona(int id, string rut, string nombres, string apellidos, string telefono) {
@@ -24,6 +27,8 @@ namespace Evaluacion2_Francisco_Berwart {
             Nombres = nombres;
             Apellidos = apellidos;
             Telefono = telefono;
+            // inicializar la lista de articulos.
+            // listadoArticulos = new List<Articulo>();
         }
 
         // metodos.
