@@ -308,7 +308,7 @@ namespace Evaluacion2_Francisco_Berwart {
                         Console.ReadLine();
                         break;
                     case "2":
-                        registrarPersona(personas);
+                        registrarPersona(personas,articulos);
                         break;
                     case "3":
                         Console.WriteLine("Opcion no lista");
@@ -372,7 +372,7 @@ namespace Evaluacion2_Francisco_Berwart {
 
 
         // Funcion para registrar una nueva persona, recibe la lista de personas.
-        static void registrarPersona(List<Persona> personas) {
+        static void registrarPersona(List<Persona> personas, List<Articulo> articulos) {
             try {
                 int newId = personas.Count + 1;
                 Console.Clear();
@@ -390,13 +390,11 @@ namespace Evaluacion2_Francisco_Berwart {
                 personas.Add(persona);
                 Console.WriteLine("Persona registrada.");
                 Console.WriteLine("");
-
+                Console.ReadLine();    
+                addArticuloToPersona(newId, personas,articulos);
 
                 // crear articulos asociados a esta nueva persona.
                 // llamar a funcion addArticulo.
-
-
-                Console.ReadLine();    
             }
             catch (Exception e) {
                 Console.WriteLine("Error al crear Persona: " + e.Message);                
@@ -477,7 +475,7 @@ namespace Evaluacion2_Francisco_Berwart {
                                 flag = false;
                                 break;
                             case "2":
-                                renderMenu(personas, articulos);
+                                renderArticulos(personas, articulos);
                                 flag = false;
                                 break;
                             default:
@@ -498,7 +496,57 @@ namespace Evaluacion2_Francisco_Berwart {
 
             } while(flag);
             // funcion para reescribir archivo de articulos.
+        }
 
+
+
+
+        // Funcion para agregar un articulo a una persona recien creada.
+        static void addArticuloToPersona(int idPersona, List<Persona> personas,List<Articulo> articulos) {
+            Console.Clear();
+            Console.WriteLine("Registrar Articulo:");
+            Console.WriteLine("");
+            Console.WriteLine("Ingrese nombre:");
+            string nombre = Console.ReadLine();
+            Console.WriteLine("Ingrese descripcion:");
+            string descripcion = Console.ReadLine();
+            Console.WriteLine("Ingrese precio:");
+            double precio = Convert.ToDouble(Console.ReadLine());
+
+            // Para manejar disponible.
+            // dar opcion de seleccion a usuario u en base a la seleccion asignar [true,flase]
+
+            Console.WriteLine("Ingrese estado: [true,false] EN MINUSCULAS!");
+            bool disponible = Convert.ToBoolean(Console.ReadLine());
+
+            // LOGICA PARA AÑADIR UN ARTICULO A UNA PERSONA EXISTENTE!!!!.
+            Console.WriteLine("Ingrese id de persona:");
+            //FrutaBase fruta = (FrutaBase)combobox.SelectedItem
+                string fechaIng = DateTime.Now.ToString();
+                Articulo articulo = new Articulo(1, nombre, descripcion, precio, fechaIng, idPersona, disponible);
+                articulos.Add(articulo);
+                Console.WriteLine("Articulo registrado.");
+                
+                Console.WriteLine("");
+                Console.WriteLine("Desea registrar otro articulo?");
+                Console.WriteLine("1. Si");
+                Console.WriteLine("2. No");
+                // reiniciar bucle.
+                string input = Console.ReadLine();
+                switch (input) {
+                    case "1":
+                        addArticuloToPersona(idPersona,personas, articulos);
+                        break;
+                    case "2":
+                        renderPersonas(personas,articulos);
+                        break;
+                    default:
+                        Console.WriteLine("Opcion no valida.");
+                        break;
+                }
+            
+            Console.WriteLine("");
+            Console.ReadLine();
         }
 
     }
