@@ -69,24 +69,9 @@ namespace Evaluacion2_Francisco_Berwart {
                 Console.WriteLine("Error: " + e.Message);
             }
 
-            // Revisar Valores de Lista Articulo.
-            try {
-                var x = articulos[0];
-                Console.WriteLine(x);
-                if(articulos.Count > 0) {
-                    Console.WriteLine("Articulos cargados en memoria");
-                } else {
-                    Console.WriteLine("No hay articulos cargados en memoria");
-                }
-
-
-            } catch (Exception e) {
-                Console.WriteLine("Error leer articulosList: " + e.Message);
-            }
-
 
             // Menu principal.
-            // renderMenu(personas, articulos);
+            renderMenu(personas, articulos);
 
             // Escribir history debe ser dinamico y revisar para escribir siemrpe una nueva linea
             writeHistory();
@@ -254,110 +239,180 @@ namespace Evaluacion2_Francisco_Berwart {
 
 
         static void renderArticulos(List<Persona> personas, List<Articulo> articulos){
-            Console.Clear();
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("Opciones Articulos:");
-            Console.WriteLine("");
-            Console.WriteLine("1. Ver Articulos disponibles.");
-            Console.WriteLine("2. Agregar Articulo.");
-            Console.WriteLine("3. Editar Articulo.");
-            Console.WriteLine("4. Eliminar Articulo.");
-            Console.WriteLine("5. Volver.");
-            string input = Console.ReadLine();
-            switch (input) {
-                case "1":
-                    Console.WriteLine("Opcion no lista.");
-                    break;
-                case "2":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "3":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "4":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "5": 
-                    renderMenu(personas, articulos);
-                    break;
-                default:
-                    Console.WriteLine("Opcion no valida.");
-                    break;
-            }
+            bool flag = true; // variable para realizar un bucle dentro de este menu.
+            do {
+                Console.Clear();
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("Opciones Articulos:");
+                Console.WriteLine("");
+                Console.WriteLine("1. Ver Articulos disponibles.");
+                Console.WriteLine("2. Agregar Articulo.");
+                Console.WriteLine("3. Editar Articulo.");
+                Console.WriteLine("4. Eliminar Articulo.");
+                Console.WriteLine("5. Volver.");
+                string input = Console.ReadLine();
+                switch (input) {
+                    case "1":
+                        getArticulosDisponibles(articulos);
+                        Console.ReadLine();
+                        break;
+                    case "2":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "3":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "4":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "5": 
+                        renderMenu(personas, articulos);
+                        flag = false;
+                        break;
+                    default:
+                        Console.WriteLine("Opcion no valida.");
+                        break;
+                }
+
+            } while (flag);
+            
         }
         
         // Esta funcion recibe la lista de personas y articulos.
         static void renderPersonas(List<Persona> personas, List<Articulo> articulos) {
-            Console.Clear();
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("Opciones Personas:");
-            Console.WriteLine("");
-            Console.WriteLine("1. Ver Personas.");
-            Console.WriteLine("2. Agregar Persona.");
-            Console.WriteLine("3. Editar Persona.");
-            Console.WriteLine("4. Eliminar Persona.");
-            Console.WriteLine("5. Volver.");
-            string input = Console.ReadLine();
-            switch (input) {
-                case "1":
-                    Console.WriteLine("Opcion no lista.");
-                    break;
-                case "2":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "3":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "4":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "5":
-                    renderMenu(personas, articulos);
-                    break;
-                default:
-                    Console.WriteLine("Opcion no valida.");
-                    break;
-            }
+            bool flag = true; // variable para realizar un bucle dentro de este menu.
+            do {
+                Console.Clear();
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("Opciones Personas:");
+                Console.WriteLine("");
+                Console.WriteLine("1. Ver Personas.");
+                Console.WriteLine("2. Agregar Persona.");
+                Console.WriteLine("3. Editar Persona."); // asignar,eliminar articulos.
+                Console.WriteLine("4. Eliminar Persona.");
+                Console.WriteLine("5. Volver.");
+                string input = Console.ReadLine();
+                switch (input) {
+                    case "1":
+                        //Console.WriteLine("Opcion no lista.");
+                        getPersonas(personas);
+                        Console.ReadLine();
+                        break;
+                    case "2":
+                        registrarPersona(personas);
+                        break;
+                    case "3":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "4":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "5":
+                        renderMenu(personas, articulos);
+                        flag = false;
+                        break;
+                    default:
+                        Console.WriteLine("Opcion no valida.");
+                        break;
+                }
+            } while(flag);
+
+
+            
         }
 
         static void renderTrueque(List<Persona> personas, List<Articulo> articulos){
-            Console.Clear();
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("---------------------------------------");
-            Console.WriteLine("Opciones Trueque:");
-            Console.WriteLine("");
-            Console.WriteLine("1. Ver Trueque.");
-            Console.WriteLine("2. Agregar Trueque.");
-            Console.WriteLine("3. Editar Trueque.");
-            Console.WriteLine("4. Eliminar Trueque.");
-            Console.WriteLine("5. Volver.");
-            string input = Console.ReadLine();
-            switch (input) {
-                case "1":
-                    Console.WriteLine("Opcion no lista.");
-                    break;
-                case "2":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "3":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "4":
-                    Console.WriteLine("Opcion no lista");
-                    break;
-                case "5":
-                    renderMenu(personas, articulos);
-                    break;
-                default:
-                    Console.WriteLine("Opcion no valida.");
-                    break;
-            }
+            bool flag = true; // variable para realizar un bucle dentro de este menu.
+            do {
+                Console.Clear();
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("Opciones Trueque:");
+                Console.WriteLine("");
+                Console.WriteLine("1. Ver Trueque.");
+                Console.WriteLine("2. Agregar Trueque.");
+                Console.WriteLine("3. Editar Trueque.");
+                Console.WriteLine("4. Eliminar Trueque.");
+                Console.WriteLine("5. Volver.");
+                string input = Console.ReadLine();
+                switch (input) {
+                    case "1":
+                        Console.WriteLine("Opcion no lista.");
+                        break;
+                    case "2":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "3":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "4":
+                        Console.WriteLine("Opcion no lista");
+                        break;
+                    case "5":
+                        renderMenu(personas, articulos);
+                        flag = false;
+                        break;
+                    default:
+                        Console.WriteLine("Opcion no valida.");
+                        break;
+                }
+            } while(flag);
         }
 
 
 
+
+        // Funcion para registrar una nueva persona, recibe la lista de personas.
+        static void registrarPersona(List<Persona> personas) {
+            try {
+                Console.Clear();
+                Console.WriteLine("Registrar Persona:");
+                Console.WriteLine("");
+                Console.WriteLine("Ingrese rut:");
+                string rut = Console.ReadLine();
+                Console.WriteLine("Ingrese nombres:");
+                string nombres = Console.ReadLine();
+                Console.WriteLine("Ingrese apellidos:");
+                string apellidos = Console.ReadLine();
+                Console.WriteLine("Ingrese Telefono:");
+                string telefono = Console.ReadLine();
+                Persona persona = new Persona(4, rut, nombres, apellidos, telefono);
+                personas.Add(persona);
+                Console.WriteLine("Persona registrada.");
+                Console.ReadLine();    
+            }
+            catch (Exception e) {
+                Console.WriteLine("Error al crear Persona: " + e.Message);                
+            }
+            // funcion para reescribir archivo de personas.
+        }
+
+
+        // Funcion que retorna el listado de Articulos disponibles utilizando linq.
+        static void getArticulosDisponibles(List<Articulo> articulos) {
+            var articulosDisponibles = from articulo in articulos
+                                      where articulo.Disponible == true
+                                      select articulo;
+                                    articulosDisponibles.ToList();
+            foreach (Articulo articulo in articulosDisponibles) {
+                Console.WriteLine(articulo.ToString());
+            }
+        }
+
+
+        // Funcion para mostrar por consola listado de personas en sistema.
+        // usando linq para ordenar por rut.
+        static void getPersonas(List<Persona> personas) {
+            var personasOrdenadas = from persona in personas
+                                    orderby persona.Rut
+                                    select persona;
+            personasOrdenadas.ToList();
+            foreach (Persona persona in personasOrdenadas) {
+                Console.WriteLine(persona.ToString());
+            }
+        }
 
 
     }
