@@ -1,1 +1,1 @@
-Esta es una linea de prueba en el archivo historial,22/06/2022 19:11:45
+Esta es una linea desde la nueva funcion!,22/06/2022 19:25:24

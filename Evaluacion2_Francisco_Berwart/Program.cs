@@ -74,9 +74,9 @@ namespace Evaluacion2_Francisco_Berwart {
             renderMenu(personas, articulos);
 
             // Escribir history debe ser dinamico y revisar para escribir siemrpe una nueva linea
-            writeHistory();
-
-
+            //writeHistory();
+            // usar funcion EscribirArchivoHistorial de la clase Funciones
+            Funciones.EscribirArchivoHistorial(personas, articulos);
 
             // 2. 
             // listadoRealPersonas =  leer csv;
@@ -190,21 +190,21 @@ namespace Evaluacion2_Francisco_Berwart {
 
 
         // Funcion para escribir el archivo de historial.
-        static void writeHistory() {
-            String path = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\historial.txt";
-            String separator = ",";
-            StringBuilder exit = new StringBuilder();
-            // Revisar que datos y de que forma se guardara el historial.
-            //String line = id + "," + descripcion + "," + nombre + "," + valorAproximado;
-            // crear lista con los articulos creados.
-            // escrbir una linea
+        // static void writeHistory() {
+        //     String path = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\historial.txt";
+        //     String separator = ",";
+        //     StringBuilder exit = new StringBuilder();
+        //     // Revisar que datos y de que forma se guardara el historial.
+        //     //String line = id + "," + descripcion + "," + nombre + "," + valorAproximado;
+        //     // crear lista con los articulos creados.
+        //     // escrbir una linea
 
-            // Crear nueva fecha
-            DateTime fecha = DateTime.Now;
-            string line = "Esta es una linea de prueba en el archivo historial" + "," + fecha;
-            exit.AppendLine(string.Join(separator, line));
-            File.WriteAllText(path, exit.ToString());
-        }
+        //     // Crear nueva fecha
+        //     DateTime fecha = DateTime.Now;
+        //     string line = "Esta es una linea de prueba en el archivo historial" + "," + fecha;
+        //     exit.AppendLine(string.Join(separator, line));
+        //     File.WriteAllText(path, exit.ToString());
+        // }
 
 
 

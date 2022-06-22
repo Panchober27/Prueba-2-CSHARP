@@ -33,6 +33,7 @@ namespace Evaluacion2_Francisco_Berwart {
 
             // escribir el archivo.
             File.WriteAllText(path, exit.ToString());
+            Console.WriteLine("Archivo Personas creado correctamente.");
         }
 
 
@@ -57,10 +58,32 @@ namespace Evaluacion2_Francisco_Berwart {
                 i++;
 
             }
-
+            
             // escribir el archivo.
             File.WriteAllText(path, exit.ToString());
+            Console.WriteLine("Archivo Articulos creado con exito.");
 
+        }
+
+
+
+
+
+        // Funcion para sobreEscribir el archivo de historial, donde registro movimientos de articulos.
+        public static void EscribirArchivoHistorial(List<Persona> personas, List<Articulo> articulos) {
+            String path = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\historial.txt";
+            String separator = ",";
+            StringBuilder exit = new StringBuilder();
+            // Revisar que datos y de que forma se guardara el historial.
+            //String line = id + "," + descripcion + "," + nombre + "," + valorAproximado;
+            // crear lista con los articulos creados.
+            // escrbir una linea
+
+            // Crear nueva fecha
+            DateTime fecha = DateTime.Now;
+            string line = "Esta es una linea desde la nueva funcion!" + "," + fecha;
+            exit.AppendLine(string.Join(separator, line));
+            File.WriteAllText(path, exit.ToString());
         }
     }
 }
