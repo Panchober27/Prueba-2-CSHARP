@@ -37,8 +37,5 @@ namespace Evaluacion2_Francisco_Berwart {
             return string.Format("{0} {1} {2} {3} {4}", Id, Rut, Nombres, Apellidos, Telefono);
         }
 
-
-
-
     }
 }

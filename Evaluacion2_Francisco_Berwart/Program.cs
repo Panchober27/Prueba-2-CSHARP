@@ -170,8 +170,14 @@ namespace Evaluacion2_Francisco_Berwart {
             personas.Add(new Persona(1, "19243198-0", "Fancisco Ignacio", "Berwart Ramirez", "933836519"));
             personas.Add(new Persona(2, "10235555-5", "Ximena Paola", "Ramirez Ruiz", "9892778"));
 
-
+            int i = 0;
             foreach (Persona p in personas) {
+                if (i == 0) {
+                    string line_ = "ID,NOMBRE,DESCRIPCION,$APROX,FECHA INGRESO,PERSONA,ESTADO";
+                    exit.AppendLine(string.Join(separator, line_));
+                }
+
+
                 // escribir una linea por cada art
                 string line = p.Id + "," + p.Rut + "," + p.Nombres + "," + p.Apellidos + "," + p.Telefono;
                 exit.AppendLine(string.Join(separator, line));
@@ -258,7 +264,8 @@ namespace Evaluacion2_Francisco_Berwart {
                         Console.ReadLine();
                         break;
                     case "2":
-                        Console.WriteLine("Opcion no lista");
+                        addArticulo(personas, articulos);
+                        Console.ReadLine();
                         break;
                     case "3":
                         Console.WriteLine("Opcion no lista");
@@ -367,6 +374,7 @@ namespace Evaluacion2_Francisco_Berwart {
         // Funcion para registrar una nueva persona, recibe la lista de personas.
         static void registrarPersona(List<Persona> personas) {
             try {
+                int newId = personas.Count + 1;
                 Console.Clear();
                 Console.WriteLine("Registrar Persona:");
                 Console.WriteLine("");
@@ -378,9 +386,16 @@ namespace Evaluacion2_Francisco_Berwart {
                 string apellidos = Console.ReadLine();
                 Console.WriteLine("Ingrese Telefono:");
                 string telefono = Console.ReadLine();
-                Persona persona = new Persona(4, rut, nombres, apellidos, telefono);
+                Persona persona = new Persona(newId, rut, nombres, apellidos, telefono);
                 personas.Add(persona);
                 Console.WriteLine("Persona registrada.");
+                Console.WriteLine("");
+
+
+                // crear articulos asociados a esta nueva persona.
+                // llamar a funcion addArticulo.
+
+
                 Console.ReadLine();    
             }
             catch (Exception e) {
@@ -392,6 +407,7 @@ namespace Evaluacion2_Francisco_Berwart {
 
         // Funcion que retorna el listado de Articulos disponibles utilizando linq.
         static void getArticulosDisponibles(List<Articulo> articulos) {
+            Console.Clear();
             var articulosDisponibles = from articulo in articulos
                                       where articulo.Disponible == true
                                       select articulo;
@@ -405,6 +421,7 @@ namespace Evaluacion2_Francisco_Berwart {
         // Funcion para mostrar por consola listado de personas en sistema.
         // usando linq para ordenar por rut.
         static void getPersonas(List<Persona> personas) {
+            Console.Clear();
             var personasOrdenadas = from persona in personas
                                     orderby persona.Rut
                                     select persona;
@@ -414,6 +431,75 @@ namespace Evaluacion2_Francisco_Berwart {
             }
         }
 
+
+
+        // Funcion para crear un articulo (debe estar asociado a una persona).
+        static void addArticulo(List<Persona> personas, List<Articulo> articulos) {
+            bool flag = true; // variable para realizar un bucle dentro de este menu.
+            do {
+
+                try {
+                    Console.Clear();
+                    Console.WriteLine("Registrar Articulo:");
+                    Console.WriteLine("");
+                    Console.WriteLine("Ingrese nombre:");
+                    string nombre = Console.ReadLine();
+                    Console.WriteLine("Ingrese descripcion:");
+                    string descripcion = Console.ReadLine();
+                    Console.WriteLine("Ingrese precio:");
+                    double precio = Convert.ToDouble(Console.ReadLine());
+
+                    // Para manejar disponible.
+                    // dar opcion de seleccion a usuario u en base a la seleccion asignar [true,flase]
+
+                    Console.WriteLine("Ingrese estado: [true,false] EN MINUSCULAS!");
+                    bool disponible = Convert.ToBoolean(Console.ReadLine());
+
+                    // LOGICA PARA AÑADIR UN ARTICULO A UNA PERSONA EXISTENTE!!!!.
+                    Console.WriteLine("Ingrese id de persona:");
+                    int idPersona = Convert.ToInt32(Console.ReadLine());
+                    Persona persona = personas.Find(x => x.Id == idPersona);
+                    //FrutaBase fruta = (FrutaBase)combobox.SelectedItem
+                    if (persona != null) {
+                        string fechaIng = DateTime.Now.ToString();
+                        Articulo articulo = new Articulo(1, nombre, descripcion, precio, fechaIng, idPersona, disponible);
+                        articulos.Add(articulo);
+                        Console.WriteLine("Articulo registrado.");
+                        
+                        Console.WriteLine("");
+                        Console.WriteLine("Desea registrar otro articulo?");
+                        Console.WriteLine("1. Si");
+                        Console.WriteLine("2. No");
+                        string input = Console.ReadLine();
+                        switch (input) {
+                            case "1":
+                                addArticulo(personas, articulos);
+                                flag = false;
+                                break;
+                            case "2":
+                                renderMenu(personas, articulos);
+                                flag = false;
+                                break;
+                            default:
+                                Console.WriteLine("Opcion no valida.");
+                                break;
+                        }
+                    } else {
+                        Console.WriteLine("El id ingresado no pertenece a una persona registrada");
+                        // reiniciar bucle.
+                        break;
+                    }
+                    Console.WriteLine("");
+                    Console.ReadLine();
+
+                } catch (Exception e) {
+                    Console.WriteLine("Error al crear Articulo: " + e.Message);
+                }
+
+            } while(flag);
+            // funcion para reescribir archivo de articulos.
+
+        }
 
     }
 }
