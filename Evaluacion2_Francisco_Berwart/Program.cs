@@ -23,30 +23,24 @@ namespace Evaluacion2_Francisco_Berwart {
             List<Persona> personas = new List<Persona>();
             List<Articulo> articulos = new List<Articulo>();
             string personasPath = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\listaPersonas.csv";
-            
+            string articulosPath = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\listaArticulos.csv";
+
+
             // crear listado de personas en base al archivo.
             StreamReader personasFile = new StreamReader(personasPath);
             string linea;
-            try
-            { 
+            try { 
                 int i= 0;
-                while ((linea = personasFile.ReadLine()) != null)
-                {
-
+                while ((linea = personasFile.ReadLine()) != null) {
                     string[] split = linea.Split(',');
-                    if (i != 0)
-                    {
+                    if (i != 0) {
                         personas.Add(new Persona(Int16.Parse(split[0]), split[1], split[2], split[3], split[3]));
                     }
-                    System.Console.WriteLine(linea);
-
                     i++;
                 }
                 personasFile.Close();
-                Console.WriteLine(linea);
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 Console.WriteLine("Error: " + e.Message);
             }
 
@@ -54,14 +48,47 @@ namespace Evaluacion2_Francisco_Berwart {
             try {
                 var x = personas[0];
                 Console.WriteLine(x);
-
             } catch (Exception e) {
-                Console.WriteLine("Error 2: " + e.Message);
+                Console.WriteLine("Error leer personasList: " + e.Message);
             }
 
-            
+            // crear listado de articulos en base al archivo.
+            StreamReader articulosFile = new StreamReader(articulosPath);
+            try { 
+                int i= 0;
+                while ((linea = articulosFile.ReadLine()) != null) {
+                    string[] split = linea.Split(',');
+                    if (i != 0) {
+                        bool estado = split[6] == "DISPONIBLE" ? true : false;
+                        articulos.Add(new Articulo(Int16.Parse(split[0]), split[1], split[2], double.Parse(split[3]), split[4], Int16.Parse(split[5]), estado));
+                    }
+                    i++;
+                }
+                articulosFile.Close();
+            } catch (Exception e) {
+                Console.WriteLine("Error: " + e.Message);
+            }
+
+            // Revisar Valores de Lista Articulo.
+            try {
+                var x = articulos[0];
+                Console.WriteLine(x);
+                if(articulos.Count > 0) {
+                    Console.WriteLine("Articulos cargados en memoria");
+                } else {
+                    Console.WriteLine("No hay articulos cargados en memoria");
+                }
+
+
+            } catch (Exception e) {
+                Console.WriteLine("Error leer articulosList: " + e.Message);
+            }
+
+
             // Menu principal.
             // renderMenu(personas, articulos);
+
+            // Escribir history debe ser dinamico y revisar para escribir siemrpe una nueva linea
             writeHistory();
 
 
@@ -98,11 +125,8 @@ namespace Evaluacion2_Francisco_Berwart {
             //String line = id + "," + descripcion + "," + nombre + "," + valorAproximado;
             // crear lista con los articulos creados.
             List<Articulo> articulos = new List<Articulo>();
-            articulos.Add(new Articulo(1, "Laptop", "Dell", 12500, 1, true, "20-06-2022"));
-            articulos.Add(new Articulo(2, "PC SD", "Toyota", 58000, 1, true, "20-06-2022"));
-            articulos.Add(new Articulo(3, "SSH SD", "PackardBll", 20000, 1, true, "18-06-2022"));
-            articulos.Add(new Articulo(4, "Suzuki", "Moto RB", 20000, 2, false, "15-06-2022"));
-
+            // articulos.Add(new Articulo(1, "Laptop", "Dell", 12500, 1, true, "20-06-2022"));
+            articulos.Add(new Articulo(1,"articulo 1","Descripocion articulo 1",250000,"22/06/2022",1,true));
             string line = "";
 
             string[] args;
@@ -117,11 +141,9 @@ namespace Evaluacion2_Francisco_Berwart {
             int i = 0;
             foreach (Articulo art in articulos) {
                 if (i == 0) {
-                    line = "ID,Nombre,ValorAproximado,PersonaId,Descripcion,FechaIngreso,ESTADO";
+                    line = "ID,NOMBRE,DESCRIPCION,$APROX,FECHA INGRESO,PERSONA,ESTADO";
                     exit.AppendLine(string.Join(separator, line));
-
                 }
-
                 // escribir una linea por cada art
                 // OJO CON EL ORDEN DE LAS PROPIEDADES.
                 string disponiBleString = "";
@@ -130,17 +152,16 @@ namespace Evaluacion2_Francisco_Berwart {
                 } else {
                     disponiBleString = "NO DISPONIBLE";
                 }
-
                 line = art.Id + ","
                     + art.Nombre
                     + ","
-                    + art.ValorAproximado
-                    + ","
-                    + art.PersonaId
-                    + ","
                     + art.Descripcion
                     + ","
+                    + art.ValorAproximado
+                    + ","
                     + art.FechaIngreso
+                    + ","
+                    + art.PersonaId
                     + ","
                     + disponiBleString;
                 ;
@@ -212,13 +233,13 @@ namespace Evaluacion2_Francisco_Berwart {
             string input = Console.ReadLine();
             switch (input) {
                 case "1":
-                    //renderArticulos();
+                    renderArticulos(personas, articulos);
                     break;
                 case "2":
-                    renderPersonas(personas ,articulos);
+                    renderPersonas(personas, articulos);
                     break;
                 case "3":
-                    //renderTrueque();
+                    renderTrueque(personas, articulos);
                     break;
                 case "4":
                     Console.WriteLine("Saliendo del Sistema.");
@@ -258,7 +279,7 @@ namespace Evaluacion2_Francisco_Berwart {
                     Console.WriteLine("Opcion no lista");
                     break;
                 case "5": 
-                    //renderMenu();
+                    renderMenu(personas, articulos);
                     break;
                 default:
                     Console.WriteLine("Opcion no valida.");
