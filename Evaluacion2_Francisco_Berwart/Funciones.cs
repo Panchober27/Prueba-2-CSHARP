@@ -48,7 +48,8 @@ namespace Evaluacion2_Francisco_Berwart {
                 while ((linea = articulosFile.ReadLine()) != null) {
                     string[] split = linea.Split(',');
                     if (i != 0) {
-                        articulos.Add(new Articulo(Int16.Parse(split[0]), split[1], split[2], split[3], split[4], split[5]));
+                        bool estado = split[6] == "DISPONIBLE" ? true : false;
+                        articulos.Add(new Articulo(Int16.Parse(split[0]), split[1], split[2], double.Parse(split[3]), split[4], Int16.Parse(split[5]), estado));
                     }
                     i++;
                 }
