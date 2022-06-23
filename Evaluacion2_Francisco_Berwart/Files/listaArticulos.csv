@@ -1,2 +1,5 @@
 ID,NOMBRE,DESCRIPCION,$APROX,FECHA INGRESO,PERSONA,ESTADO
-1,articulo 1,Descripocion articulo 1,250000,22/06/2022,1,DISPONIBLE
+1,articulo 1,Descripocion articulo 1,34000,20/06/2022,1,DISPONIBLE
+2,articulo 2,Descripocion articulo 2,250000,20/06/2022,1,DISPONIBLE
+3,articulo 3,Descripocion articulo 3,45000,17/06/2022,2,DISPONIBLE
+4,articulo 4,Descripocion articulo 4,50000,22/06/2022,2,DISPONIBLE

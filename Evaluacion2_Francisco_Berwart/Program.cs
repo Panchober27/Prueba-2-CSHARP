@@ -110,18 +110,11 @@ namespace Evaluacion2_Francisco_Berwart {
             //String line = id + "," + descripcion + "," + nombre + "," + valorAproximado;
             // crear lista con los articulos creados.
             List<Articulo> articulos = new List<Articulo>();
-            // articulos.Add(new Articulo(1, "Laptop", "Dell", 12500, 1, true, "20-06-2022"));
-            articulos.Add(new Articulo(1,"articulo 1","Descripocion articulo 1",250000,"22/06/2022",1,true));
+            articulos.Add(new Articulo(1,"articulo 1","Descripocion articulo 1",34000,"20/06/2022",1,true));
+            articulos.Add(new Articulo(2,"articulo 2","Descripocion articulo 2",250000,"20/06/2022",1,true));
+            articulos.Add(new Articulo(3,"articulo 3","Descripocion articulo 3",45000,"17/06/2022",2,true));
+            articulos.Add(new Articulo(4,"articulo 4","Descripocion articulo 4",50000,"22/06/2022",2,true));
             string line = "";
-
-            string[] args;
-
-            /**
-            if () {
-                string Header = "fecha,Rut, Nombre, Apellido, Ciudad, Comuna, Telefono, Preferencias1, Preferencias2, Preferencias3, valor, Descripcion, ObjetoIntercambio";
-                File.WriteAllText(args[0], Header);
-            }
-            **/
 
             int i = 0;
             foreach (Articulo art in articulos) {
@@ -176,36 +169,14 @@ namespace Evaluacion2_Francisco_Berwart {
                     string line_ = "ID,NOMBRE,DESCRIPCION,$APROX,FECHA INGRESO,PERSONA,ESTADO";
                     exit.AppendLine(string.Join(separator, line_));
                 }
-
-
                 // escribir una linea por cada art
                 string line = p.Id + "," + p.Rut + "," + p.Nombres + "," + p.Apellidos + "," + p.Telefono;
                 exit.AppendLine(string.Join(separator, line));
+                i++;
             }
-
             // escribir el archivo.
             File.WriteAllText(path, exit.ToString());
         }
-
-
-
-        // Funcion para escribir el archivo de historial.
-        // static void writeHistory() {
-        //     String path = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\historial.txt";
-        //     String separator = ",";
-        //     StringBuilder exit = new StringBuilder();
-        //     // Revisar que datos y de que forma se guardara el historial.
-        //     //String line = id + "," + descripcion + "," + nombre + "," + valorAproximado;
-        //     // crear lista con los articulos creados.
-        //     // escrbir una linea
-
-        //     // Crear nueva fecha
-        //     DateTime fecha = DateTime.Now;
-        //     string line = "Esta es una linea de prueba en el archivo historial" + "," + fecha;
-        //     exit.AppendLine(string.Join(separator, line));
-        //     File.WriteAllText(path, exit.ToString());
-        // }
-
 
 
 
@@ -338,26 +309,41 @@ namespace Evaluacion2_Francisco_Berwart {
                 Console.WriteLine("---------------------------------------");
                 Console.WriteLine("Opciones Trueque:");
                 Console.WriteLine("");
-                Console.WriteLine("1. Ver Trueque.");
-                Console.WriteLine("2. Agregar Trueque.");
-                Console.WriteLine("3. Editar Trueque.");
-                Console.WriteLine("4. Eliminar Trueque.");
-                Console.WriteLine("5. Volver.");
+                Console.WriteLine("1. Realizar Trueque.");
+                Console.WriteLine("2. Volver.");
                 string input = Console.ReadLine();
                 switch (input) {
                     case "1":
-                        Console.WriteLine("Opcion no lista.");
+                        // obtner por inputs de usuario.
+                        // el usuario da el rut de las personas y los ids de los articulos.
+                        // se pasan por parametros a la funcion hacerTrueque de Funciones.cs
+                        Console.Clear();
+                        Console.WriteLine("Generar Trueque.");
+                        Console.WriteLine("");
+                        Console.WriteLine("Ingrese el rut de la persona 1:");
+                        string rut1 = Console.ReadLine();
+                        Console.WriteLine("Ingrese el rut de la persona 2:");
+                        string rut2 = Console.ReadLine();
+                        Console.WriteLine("Ingrese el id del articulo 1:");
+                        int id1 = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Ingrese el id del articulo 2:");
+                        int id2 = int.Parse(Console.ReadLine());
+                        // llamar a la funcion hacerTrueque de Funciones.cs
+                        // armar arreglo con los ids de articulos y personas para pasarlos por parametros a a la funcion
+                        int[] ids = new int[2];
+                        ids[0] = id1;
+                        ids[1] = id2;
+                        string[] ruts = new string[2];
+                        ruts[0] = rut1;
+                        ruts[1] = rut2;
+                        var resp = Funciones.hacerTrueque(personas, articulos, ids, ruts);
+                        if(resp){
+                            Console.WriteLine("Trueque realizado.");
+                        } else {
+                            Console.WriteLine("Trueque no realizado.");
+                        }
                         break;
                     case "2":
-                        Console.WriteLine("Opcion no lista");
-                        break;
-                    case "3":
-                        Console.WriteLine("Opcion no lista");
-                        break;
-                    case "4":
-                        Console.WriteLine("Opcion no lista");
-                        break;
-                    case "5":
                         renderMenu(personas, articulos);
                         flag = false;
                         break;
