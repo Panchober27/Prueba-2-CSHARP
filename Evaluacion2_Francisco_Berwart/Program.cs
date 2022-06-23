@@ -44,14 +44,6 @@ namespace Evaluacion2_Francisco_Berwart {
                 Console.WriteLine("Error: " + e.Message);
             }
 
-            // Revisar Valores de Lista Persona.
-            try {
-                var x = personas[0];
-                Console.WriteLine(x);
-            } catch (Exception e) {
-                Console.WriteLine("Error leer personasList: " + e.Message);
-            }
-
             // crear listado de articulos en base al archivo.
             StreamReader articulosFile = new StreamReader(articulosPath);
             try { 
@@ -90,15 +82,6 @@ namespace Evaluacion2_Francisco_Berwart {
 
             Console.ReadLine();
         }
-
-
-
-
-
-
-
-
-
 
 
         // funcion para ....
@@ -407,7 +390,7 @@ namespace Evaluacion2_Francisco_Berwart {
         static void getPersonas(List<Persona> personas) {
             Console.Clear();
             var personasOrdenadas = from persona in personas
-                                    orderby persona.Rut
+                                    orderby persona.Id
                                     select persona;
             personasOrdenadas.ToList();
             foreach (Persona persona in personasOrdenadas) {

@@ -10,6 +10,60 @@ namespace Evaluacion2_Francisco_Berwart {
 
         // Archivo con las funciones para operar en el sistema.
 
+        // Funcion para leer archivo de personas, retorna listado de personas.
+        public static List<Persona> leerArchivoPersonas() {
+            List<Persona> personas = new List<Persona>();
+            string personasPath = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\listaPersonas.csv";
+            // crear listado de personas en base al archivo.
+            StreamReader personasFile = new StreamReader(personasPath);
+            string linea;
+            try { 
+                int i= 0;
+                while ((linea = personasFile.ReadLine()) != null) {
+                    string[] split = linea.Split(',');
+                    if (i != 0) {
+                        personas.Add(new Persona(Int16.Parse(split[0]), split[1], split[2], split[3], split[3]));
+                    }
+                    i++;
+                }
+                personasFile.Close();
+                return personas;
+            }
+            catch (Exception e) {
+                Console.WriteLine("Error: " + e.Message);
+                return null;
+            }
+        }
+        
+
+        // Funcion para leer archivo de articulos, retorna listado de articulos.
+        public static List<Articulo> leerArchivoArticulos() {
+            List<Articulo> articulos = new List<Articulo>();
+            string articulosPath = @"E:\INACAP-RESPALDOS\Evaluacion2_Francisco_Berwart\Evaluacion2_Francisco_Berwart\Files\listaArticulos.csv";
+            // crear listado de articulos en base al archivo.
+            StreamReader articulosFile = new StreamReader(articulosPath);
+            string linea;
+            try { 
+                int i= 0;
+                while ((linea = articulosFile.ReadLine()) != null) {
+                    string[] split = linea.Split(',');
+                    if (i != 0) {
+                        articulos.Add(new Articulo(Int16.Parse(split[0]), split[1], split[2], split[3], split[4], split[5]));
+                    }
+                    i++;
+                }
+                articulosFile.Close();
+                return articulos;
+            }
+            catch (Exception e) {
+                Console.WriteLine("Error: " + e.Message);
+                return null;
+            }
+        }
+
+                    
+
+
 
 
 
@@ -127,6 +181,9 @@ namespace Evaluacion2_Francisco_Berwart {
                 // escribir historial.
                 EscribirArchivoHistorial(personas, articulos);
 
+                // mensahe de exito para el usuario.
+                Console.WriteLine("Trueque realizado con exito.");
+                Console.ReadLine();
                 // retornar true.
                 return true;
             } catch (Exception e) {
